@@ -10,4 +10,10 @@ describe('Potter', () => {
     potter.buy([]);
     expect(potter.price).toBe(0);
   });
+
+  test('buy one book', () => {
+    const potter = new Potter();
+    potter.buy([0]);
+    expect(potter.price).toBe(8);
+  });
 });
