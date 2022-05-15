@@ -16,4 +16,10 @@ describe('Potter', () => {
     potter.buy([0]);
     expect(potter.price).toBe(8);
   });
+
+  test('buy same books', () => {
+    const potter = new Potter();
+    potter.buy([0, 0, 0]);
+    expect(potter.price).toBe(24);
+  });
 });
