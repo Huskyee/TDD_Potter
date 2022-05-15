@@ -1,7 +1,13 @@
 export class Potter {
-    buy(booksIndices: number[]) {}
+    private _total = 0;
+    private _unitPrice = 8;
+    buy(booksIndices: number[]) {
+        if(booksIndices.length) {
+            this._total += this._unitPrice;
+        }
+    }
 
     get price() {
-        return 0;
+        return this._total;
     }
 }
