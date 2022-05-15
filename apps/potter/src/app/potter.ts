@@ -2,6 +2,6 @@ export class Potter {
     buy(booksIndices: number[]) {}
 
     get price() {
-        return -1;
+        return 0;
     }
 }
