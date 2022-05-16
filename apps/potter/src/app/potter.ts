@@ -16,6 +16,9 @@ export class Potter {
         if(this._numberOfTypes == 2) {
             this._total *= 0.95;
         }
+        else if(this._numberOfTypes == 3) {
+            this._total *= 0.9;
+        }
     }
 
     get price() {
