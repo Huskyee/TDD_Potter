@@ -45,4 +45,9 @@ describe('Potter', () => {
     potter.buy([0, 1, 2, 3, 4]);
     expect(potter.price).toBe(8 * 5 * 0.75);
   });
+
+  test('several discounts 1', () => {
+    potter.buy([0, 0, 1, 1, 2, 3]);
+    expect(potter.price).toBe(8 * 4 * 0.8 + 8 * 2 * 0.95);
+  });
 });
