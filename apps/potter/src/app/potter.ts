@@ -1,29 +1,44 @@
 export class Potter {
     private _total = 0;
     private _unitPrice = 8;
-    private _books = [0, 0, 0, 0, 0];
-    private _numberOfTypes = 0;
-    
+    private _shoppingCart = [0, 0, 0, 0, 0];
+
     buy(booksIndices: number[]) {
         this.calOriginalPrice(booksIndices);
-        this.calNumberOfTypes();
-        this.calTotal();
+        while(!this.isShoppingCartEmpty()) {
+            let numberOfTypes = this.calNumberOfTypes();
+            let discount = this.getDiscount(numberOfTypes);
+            this.calTotal(discount);
+        }
     }
 
     get price() {
         return this._total;
     }
 
-    private calNumberOfTypes() {
-        for(let i=0; i<this._books.length; i++) {
-            if(this._books[i]) {
-                this._numberOfTypes++;
+    private isShoppingCartEmpty() {
+        for(let i=0; i<this._shoppingCart.length; i++) {
+            if(this._shoppingCart[i]) {
+                return false;
             }
         }
+        return true;
     }
 
-    private calTotal() {
-        this._total *= (1 - this.getDiscount());
+    private calNumberOfTypes() {
+        let numberOfTypes = 0;
+        for(let i=0; i<this._shoppingCart.length; i++) {
+            if(this._shoppingCart[i]) {
+                numberOfTypes++;
+                this._shoppingCart[i]--;
+            }
+        }
+        return numberOfTypes;
+    }
+
+    private calTotal(discount: number) {
+        this._total -= discount;
+        this._total = Math.round(this._total * 100) / 100;
     }
 
     private calOriginalPrice(booksIndices: number[]) {
@@ -34,25 +49,26 @@ export class Potter {
     }
 
     private updateBooks(bookIndex: number) {
-        this._books[bookIndex]++;
+        this._shoppingCart[bookIndex]++;
     }
 
-    private getDiscount() {
-        let discount = 0;
-        switch(this._numberOfTypes) {
+    private getDiscount(numberOfTypes: number) {
+        let discountRate = 0;
+        switch(numberOfTypes) {
             case 2:
-                discount = 0.05;
+                discountRate = 0.05;
                 break;
             case 3:
-                discount = 0.1;
+                discountRate = 0.1;
                 break;
             case 4:
-                discount = 0.2;
+                discountRate = 0.2;
                 break;
             case 5:
-                discount = 0.25;
+                discountRate = 0.25;
                 break;
         }
+        let discount = discountRate * this._unitPrice * numberOfTypes;
         return discount;
     }
 }
