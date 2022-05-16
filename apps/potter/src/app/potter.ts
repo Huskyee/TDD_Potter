@@ -2,6 +2,9 @@ export class Potter {
     private _total = 0;
     private _unitPrice = 8;
     private _shoppingCart = [0, 0, 0, 0, 0];
+    private _numberOfTypes_5_count = 0;
+    private _numberOfTypes_3_count = 0;
+    private _specialCombinationDiscount = 0.4;
 
     buy(booksIndices: number[]) {
         this.calOriginalPrice(booksIndices);
@@ -9,6 +12,11 @@ export class Potter {
             let numberOfTypes = this.calNumberOfTypes();
             let discount = this.getDiscount(numberOfTypes);
             this.calTotal(discount);
+        }
+        while(this._numberOfTypes_5_count && this._numberOfTypes_3_count) {
+            this.calTotal(this._specialCombinationDiscount);
+            this._numberOfTypes_5_count--;
+            this._numberOfTypes_3_count--;
         }
     }
 
@@ -32,6 +40,12 @@ export class Potter {
                 numberOfTypes++;
                 this._shoppingCart[i]--;
             }
+        }
+        if(numberOfTypes == 5) {
+            this._numberOfTypes_5_count++;
+        }
+        else if(numberOfTypes == 3) {
+            this._numberOfTypes_3_count++;
         }
         return numberOfTypes;
     }
