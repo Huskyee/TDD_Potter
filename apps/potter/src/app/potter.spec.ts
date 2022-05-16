@@ -23,26 +23,26 @@ describe('Potter', () => {
 
   test('buy same books', () => {
     potter.buy([0, 0, 0]);
-    expect(potter.price).toBe(24);
+    expect(potter.price).toBe(8 * 3);
   });
 
   test('buy two different books', () => {
     potter.buy([0, 1]);
-    expect(potter.price).toBe(15.2);
+    expect(potter.price).toBe(8 * 2 * 0.95);
   });
 
   test('buy three different books', () => {
     potter.buy([1, 2, 4]);
-    expect(potter.price).toBe(21.6);
+    expect(potter.price).toBe(8 * 3 * 0.9);
   });
 
   test('buy four different books', () => {
     potter.buy([1, 2, 3, 4]);
-    expect(potter.price).toBe(25.6);
+    expect(potter.price).toBe(8 * 4 * 0.8);
   });
 
   test('buy five different books', () => {
     potter.buy([0, 1, 2, 3, 4]);
-    expect(potter.price).toBe(30);
+    expect(potter.price).toBe(8 * 5 * 0.75);
   });
 });
