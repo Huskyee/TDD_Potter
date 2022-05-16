@@ -25,4 +25,9 @@ describe('Potter', () => {
     potter.buy([0, 0, 0]);
     expect(potter.price).toBe(24);
   });
+
+  test('buy two different books', () => {
+    potter.buy([0, 1]);
+    expect(potter.price).toBe(15.2);
+  });
 });
